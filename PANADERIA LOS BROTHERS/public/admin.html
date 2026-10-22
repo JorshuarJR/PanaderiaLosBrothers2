@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin | Los Brothers</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+<!-- ======================================
+     SIDEBAR
+====================================== -->
+
+<aside class="admin-sidebar" id="adminSidebar">
+
+<div class="sidebar-brand">
+
+<div class="sidebar-logo">
+🥐
+</div>
+
+<div>
+<strong>Los Brothers</strong>
+<span>Administración</span>
+</div>
+
+</div>
+
+
+<nav class="sidebar-menu">
+
+<button class="sidebar-item active" data-section="dashboardSection">
+<span>📊</span>
+<div>
+<strong>Dashboard</strong>
+<small>Resumen y ventas</small>
+</div>
+</button>
+
+
+<button class="sidebar-item" data-section="ordersSection">
+<span>📦</span>
+<div>
+<strong>Pedidos</strong>
+<small>Gestionar pedidos</small>
+</div>
+</button>
+
+
+<button class="sidebar-item" data-section="productsSection">
+<span>🥐</span>
+<div>
+<strong>Productos</strong>
+<small>Gestionar catálogo</small>
+</div>
+</button>
+
+
+<button class="sidebar-item" data-section="settingsSection">
+<span>⚙️</span>
+<div>
+<strong>Configuración</strong>
+<small>Ajustes del sistema</small>
+</div>
+</button>
+
+</nav>
+
+
+<div class="sidebar-bottom">
+
+<a href="/" class="sidebar-store">
+🏠
+<span>Ir a la tienda</span>
+</a>
+
+
+<button id="logoutButton" class="sidebar-logout">
+🚪
+<span>Cerrar sesión</span>
+</button>
+
+
+<div class="sidebar-nexora">
+Desarrollado por
+<strong>NEXORA</strong>
+</div>
+
+</div>
+
+</aside>
+
+
+<!-- ======================================
+     CONTENIDO PRINCIPAL
+====================================== -->
+
+<div class="admin-main">
+
+
+<header class="admin-topbar">
+
+<div class="topbar-left">
+
+<button id="menuToggle" class="menu-toggle">
+☰
+</button>
+
+<div>
+<span class="topbar-eyebrow">PANEL ADMINISTRATIVO</span>
+<h1 id="pageTitle">Dashboard</h1>
+</div>
+
+</div>
+
+
+<div class="header-actions">
+
+<button id="refreshButton" class="refresh-button">
+🔄 Actualizar
+</button>
+
+<div class="admin-user">
+<div class="admin-user-icon">👤</div>
+<div>
+<strong>Administrador</strong>
+<span>Los Brothers</span>
+</div>
+</div>
+
+</div>
+
+</header>
+
+
+<main class="admin-container">
+
+
+<!-- ======================================
+     DASHBOARD
+====================================== -->
+
+<section id="dashboardSection" class="admin-section active-section">
+
+<div id="salesDashboard"></div>
+
+
+<section class="stats-grid admin-stats">
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📦
+</div>
+
+<div>
+<span>Total pedidos</span>
+<strong id="totalOrders">0</strong>
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🟡
+</div>
+
+<div>
+<span>Pendientes</span>
+<strong id="pendingOrders">0</strong>
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+👨‍🍳
+</div>
+
+<div>
+<span>En preparación</span>
+<strong id="preparingOrders">0</strong>
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+💰
+</div>
+
+<div>
+<span>Ventas</span>
+<strong id="totalSales">$0</strong>
+</div>
+
+</div>
+
+</section>
+
+</section>
+
+
+<!-- ======================================
+     PEDIDOS
+====================================== -->
+
+<section id="ordersSection" class="admin-section">
+
+<div class="section-header">
+
+<div>
+
+<span class="eyebrow">
+GESTIÓN DE PEDIDOS
+</span>
+
+<h2>
+Pedidos recibidos
+</h2>
+
+<p>
+Aquí aparecen los pedidos guardados directamente en la base de datos.
+</p>
+
+</div>
+
+
+<div class="filter-container">
+
+<label for="statusFilter">
+Filtrar
+</label>
+
+<select id="statusFilter">
+
+<option value="Todos">
+Todos
+</option>
+
+<option value="Pendiente">
+Pendientes
+</option>
+
+<option value="En preparación">
+En preparación
+</option>
+
+<option value="En camino">
+En camino
+</option>
+
+<option value="Entregado">
+Entregados
+</option>
+
+<option value="Cancelado">
+Cancelados
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div id="ordersContainer" class="orders-container">
+
+<div class="loading">
+
+<div>
+🥐
+</div>
+
+<p>
+Cargando pedidos...
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================
+     PRODUCTOS
+====================================== -->
+
+<section id="productsSection" class="admin-section">
+
+<div class="section-header">
+
+<div>
+
+<span class="eyebrow">
+CATÁLOGO
+</span>
+
+<h2>
+Gestión de productos
+</h2>
+
+<p>
+Administra los productos que aparecen en la tienda de Los Brothers.
+</p>
+
+</div>
+
+
+<button id="addProductButton" class="primary-button">
+➕ Agregar producto
+</button>
+
+</div>
+
+
+<div class="product-tools">
+
+<input
+type="text"
+id="productSearch"
+placeholder="🔎 Buscar producto..."
+>
+
+
+<select id="productCategoryFilter">
+
+<option value="Todos">
+Todas las categorías
+</option>
+
+</select>
+
+
+<select id="productStatusFilter">
+
+<option value="Todos">
+Todos
+</option>
+
+<option value="Activos">
+Activos
+</option>
+
+<option value="Inactivos">
+Inactivos
+</option>
+
+</select>
+
+</div>
+
+
+<div id="productsAdminContainer" class="products-admin-container">
+
+<div class="loading">
+
+<div>
+🥐
+</div>
+
+<p>
+Cargando productos...
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================
+     CONFIGURACIÓN
+====================================== -->
+
+<section id="settingsSection" class="admin-section">
+
+<div class="section-header">
+
+<div>
+
+<span class="eyebrow">
+CONFIGURACIÓN
+</span>
+
+<h2>
+Configuración del panel
+</h2>
+
+<p>
+Información general del sistema administrativo.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="settings-grid">
+
+
+<div class="settings-card">
+
+<div class="settings-card-icon">
+🏪
+</div>
+
+<div>
+
+<span>
+Negocio
+</span>
+
+<strong>
+Los Brothers
+</strong>
+
+<p>
+Panadería & Repostería
+</p>
+
+</div>
+
+</div>
+
+
+<div class="settings-card">
+
+<div class="settings-card-icon">
+📍
+</div>
+
+<div>
+
+<span>
+Ubicación
+</span>
+
+<strong>
+León XIII
+</strong>
+
+<p>
+Atención local
+</p>
+
+</div>
+
+</div>
+
+
+<div class="settings-card">
+
+<div class="settings-card-icon">
+🗄️
+</div>
+
+<div>
+
+<span>
+Base de datos
+</span>
+
+<strong>
+MySQL
+</strong>
+
+<p>
+Sistema conectado al servidor
+</p>
+
+</div>
+
+</div>
+
+
+<div class="settings-card">
+
+<div class="settings-card-icon">
+💻
+</div>
+
+<div>
+
+<span>
+Sistema
+</span>
+
+<strong>
+Los Brothers Admin</strong>
+
+<p>
+Panel administrativo NEXORA
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="settings-info">
+
+<div>
+<strong>💡 Panel administrativo</strong>
+
+<p>
+Desde este panel puedes controlar los pedidos y productos de la tienda.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer class="admin-footer">
+
+<span>
+🥐 Los Brothers
+</span>
+
+<span>
+Panel administrativo
+</span>
+
+<strong>
+NEXORA
+</strong>
+
+</footer>
+
+</div>
+
+</div>
+
+
+<!-- ======================================
+     MODAL PRODUCTO
+====================================== -->
+
+<div id="productModal" class="product-modal-overlay">
+
+<div class="product-modal">
+
+<div class="product-modal-header">
+
+<div>
+
+<span class="eyebrow">
+CATÁLOGO
+</span>
+
+<h2 id="productModalTitle">
+Agregar producto
+</h2>
+
+</div>
+
+<button id="closeProductModal" class="close-modal">
+×
+</button>
+
+</div>
+
+
+<form id="productForm">
+
+<input type="hidden" id="productId">
+
+
+<div class="product-form-grid">
+
+
+<div class="form-group">
+
+<label for="productName">
+Nombre
+</label>
+
+<input
+type="text"
+id="productName"
+placeholder="Ej: Croissant"
+required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="productPrice">
+Precio
+</label>
+
+<input
+type="number"
+id="productPrice"
+min="0"
+step="100"
+placeholder="2500"
+required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="productCategory">
+Categoría
+</label>
+
+<input
+type="text"
+id="productCategory"
+list="categorySuggestions"
+placeholder="Panadería"
+required
+>
+
+<datalist id="categorySuggestions">
+
+<option value="Panadería"></option>
+<option value="Repostería"></option>
+<option value="Snacks"></option>
+<option value="Cafetería"></option>
+<option value="Bebidas"></option>
+<option value="Dulces"></option>
+
+</datalist>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="productImage">
+Imagen
+</label>
+
+<input
+type="text"
+id="productImage"
+placeholder="Ej: foto.jpeg"
+>
+
+<small>
+Usa el nombre de una imagen que esté dentro de
+<strong>public/assets</strong>.
+</small>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="productDescription">
+Descripción
+</label>
+
+<textarea
+id="productDescription"
+rows="4"
+placeholder="Descripción del producto..."
+></textarea>
+
+</div>
+
+
+<div class="product-preview">
+
+<img
+id="productImagePreview"
+src="assets/Logo.jpeg"
+alt="Vista previa"
+>
+
+<div>
+
+<strong>
+Vista previa
+</strong>
+
+<span id="previewName">
+Producto
+</span>
+
+</div>
+
+</div>
+
+
+<div class="product-form-actions">
+
+<button
+type="button"
+id="cancelProductButton"
+class="secondary-button"
+>
+Cancelar
+</button>
+
+<button
+type="submit"
+class="primary-button"
+>
+💾 Guardar producto
+</button>
+
+</div>
+
+
+<p id="productMessage" class="product-message"></p>
+
+</form>
+
+</div>
+
+</div>
+
+
+<script src="admin.js"></script>
+
+</body>
+
+</html>

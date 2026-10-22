@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión | Los Brothers</title>
+
+    <link rel="stylesheet" href="client-login.css">
+</head>
+
+<body>
+
+    <main class="client-login-page">
+
+        <div class="client-login-decoration decoration-one"></div>
+        <div class="client-login-decoration decoration-two"></div>
+
+        <section class="client-login-card">
+
+            <div class="client-login-brand">
+
+                <div class="client-logo">
+                    🥐
+                </div>
+
+                <div>
+                    <h1>Los Brothers</h1>
+                    <span>Panadería & más</span>
+                </div>
+
+            </div>
+
+            <div class="client-login-header">
+
+                <span class="client-eyebrow">
+                    CUENTA DE CLIENTE
+                </span>
+
+                <h2>¡Qué bueno verte!</h2>
+
+                <p>
+                    Inicia sesión para continuar con tus pedidos
+                    y disfrutar de tu experiencia en Los Brothers.
+                </p>
+
+            </div>
+
+            <form id="clientLoginForm">
+
+                <div class="client-form-group">
+
+                    <label for="clientCorreo">
+                        Correo electrónico
+                    </label>
+
+                    <div class="client-input">
+
+                        <span>✉️</span>
+
+                        <input
+                            type="email"
+                            id="clientCorreo"
+                            placeholder="tucorreo@gmail.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="client-form-group">
+
+                    <label for="clientPassword">
+                        Contraseña
+                    </label>
+
+                    <div class="client-input">
+
+                        <span>🔒</span>
+
+                        <input
+                            type="password"
+                            id="clientPassword"
+                            placeholder="Tu contraseña"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            id="showPassword"
+                        >
+                            👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="client-login-button"
+                    id="clientLoginButton"
+                >
+                    Iniciar sesión
+                </button>
+
+                <div
+                    id="clientLoginMessage"
+                    class="client-login-message"
+                ></div>
+
+            </form>
+
+            <div class="client-login-divider">
+                <span>¿Nuevo en Los Brothers?</span>
+            </div>
+
+            <a
+                href="/register.html"
+                class="create-account-button"
+            >
+                ✨ Crear una cuenta
+            </a>
+
+            <div class="client-login-footer">
+
+                <a href="/">
+                    ← Volver a la tienda
+                </a>
+
+            </div>
+
+            <div class="client-login-nexora">
+                DESARROLLADO POR <strong>NEXORA</strong>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="client-login.js"></script>
+
+</body>
+</html>

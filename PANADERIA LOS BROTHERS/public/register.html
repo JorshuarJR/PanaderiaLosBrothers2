@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Crear cuenta | Los Brothers</title>
+
+    <link
+        rel="stylesheet"
+        href="register.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="login-page">
+
+        <section class="login-card">
+
+
+            <!-- MARCA -->
+
+            <div class="login-brand">
+
+                <div class="login-logo">
+                    🥐
+                </div>
+
+                <div>
+
+                    <h1>
+                        Los Brothers
+                    </h1>
+
+                    <p>
+                        Panadería & más
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- TITULO -->
+
+            <div class="login-header">
+
+                <span class="eyebrow">
+                    CUENTA DE CLIENTE
+                </span>
+
+                <h2>
+                    Crea tu cuenta 🥐
+                </h2>
+
+                <p>
+                    Regístrate para hacer pedidos,
+                    guardar tus datos y disfrutar
+                    de una experiencia personalizada.
+                </p>
+
+            </div>
+
+
+            <!-- FORMULARIO -->
+
+            <form id="registerForm">
+
+
+                <div class="register-extra">
+
+
+                    <div class="form-group">
+
+                        <label for="nombre">
+                            Nombre
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="Tu nombre"
+                            autocomplete="given-name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="apellido">
+                            Apellido
+                        </label>
+
+                        <input
+                            type="text"
+                            id="apellido"
+                            name="apellido"
+                            placeholder="Tu apellido"
+                            autocomplete="family-name"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="correo">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        placeholder="ejemplo@gmail.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="telefono">
+                        Teléfono
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefono"
+                        name="telefono"
+                        placeholder="300 000 0000"
+                        autocomplete="tel"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Mínimo 6 caracteres"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+
+                    <div class="password-help">
+                        Usa mínimo 6 caracteres.
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirmar contraseña
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        placeholder="Repite tu contraseña"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button"
+                    id="registerButton"
+                >
+                    Crear mi cuenta
+                </button>
+
+
+                <div
+                    id="registerMessage"
+                    class="login-message"
+                ></div>
+
+
+                <div
+                    id="successMessage"
+                    class="success-message"
+                >
+                    ✅ Cuenta creada correctamente.
+                    Redirigiendo al inicio de sesión...
+                </div>
+
+
+            </form>
+
+
+            <!-- LOGIN CLIENTE -->
+
+            <div class="login-footer">
+
+                <p>
+                    ¿Ya tienes una cuenta?
+                </p>
+
+                <p>
+
+                    <a href="/client-login.html">
+                        🔐 Iniciar sesión como cliente
+                    </a>
+
+                </p>
+
+                <p>
+
+                    <a href="/">
+                        ← Volver a la tienda
+                    </a>
+
+                </p>
+
+            </div>
+
+
+            <!-- NEXORA -->
+
+            <div class="login-nexora">
+
+                DESARROLLADO POR
+                <strong>NEXORA</strong>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <script src="register.js"></script>
+
+</body>
+
+</html>

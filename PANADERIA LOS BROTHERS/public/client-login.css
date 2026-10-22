@@ -1,0 +1,438 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8ed 0%,
+            #f8ead8 48%,
+            #f4d8bb 100%
+        );
+
+    color: #392820;
+}
+
+.client-login-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 18px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.client-login-decoration {
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(1px);
+
+    pointer-events: none;
+}
+
+.decoration-one {
+    width: 360px;
+    height: 360px;
+
+    background: rgba(208, 132, 67, 0.14);
+
+    top: -140px;
+    right: -100px;
+}
+
+.decoration-two {
+    width: 280px;
+    height: 280px;
+
+    background: rgba(120, 76, 47, 0.10);
+
+    bottom: -130px;
+    left: -100px;
+}
+
+.client-login-card {
+    width: 100%;
+    max-width: 440px;
+
+    background: rgba(255, 253, 249, 0.97);
+
+    border: 1px solid rgba(117, 82, 57, 0.10);
+
+    border-radius: 28px;
+
+    padding: 36px 34px 26px;
+
+    box-shadow:
+        0 25px 70px rgba(76, 48, 29, 0.18);
+
+    position: relative;
+    z-index: 2;
+}
+
+.client-login-brand {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+}
+
+.client-logo {
+    width: 54px;
+    height: 54px;
+
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8d5638,
+            #c98548
+        );
+
+    font-size: 28px;
+
+    box-shadow:
+        0 10px 25px rgba(110, 67, 40, 0.22);
+}
+
+.client-login-brand h1 {
+    font-size: 25px;
+
+    color: #4b2d20;
+
+    letter-spacing: -0.5px;
+}
+
+.client-login-brand span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #9a8172;
+
+    font-size: 12px;
+}
+
+.client-login-header {
+    text-align: center;
+
+    margin-bottom: 27px;
+}
+
+.client-eyebrow {
+    display: inline-block;
+
+    color: #b56f39;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+
+    margin-bottom: 9px;
+}
+
+.client-login-header h2 {
+    font-size: 28px;
+
+    color: #392820;
+
+    margin-bottom: 9px;
+
+    letter-spacing: -0.7px;
+}
+
+.client-login-header p {
+    color: #806f64;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+.client-form-group {
+    margin-bottom: 18px;
+}
+
+.client-form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #513b30;
+
+    font-size: 12px;
+
+    font-weight: 800;
+}
+
+.client-input {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    height: 51px;
+
+    padding: 0 14px;
+
+    background: #fff;
+
+    border: 1px solid #e5d8cd;
+
+    border-radius: 14px;
+
+    transition: 0.2s;
+}
+
+.client-input:focus-within {
+    border-color: #bd7b46;
+
+    box-shadow:
+        0 0 0 4px rgba(189, 123, 70, 0.10);
+}
+
+.client-input span {
+    font-size: 15px;
+}
+
+.client-input input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #392820;
+
+    font-size: 13px;
+}
+
+.client-input input::placeholder {
+    color: #b8aaa1;
+}
+
+.show-password {
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    padding: 4px;
+}
+
+.client-login-button {
+    width: 100%;
+
+    height: 53px;
+
+    margin-top: 7px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #74462f,
+            #b9743d
+        );
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 24px rgba(112, 68, 43, 0.20);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.client-login-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 16px 28px rgba(112, 68, 43, 0.26);
+}
+
+.client-login-button:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+.client-login-message {
+    min-height: 18px;
+
+    margin-top: 12px;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.client-login-message.error {
+    color: #b64747;
+}
+
+.client-login-message.success {
+    color: #4e8658;
+}
+
+.client-login-divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 24px 0 14px;
+
+    color: #a39186;
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+.client-login-divider::before,
+.client-login-divider::after {
+    content: "";
+
+    height: 1px;
+
+    flex: 1;
+
+    background: #e7ddd6;
+}
+
+.create-account-button {
+    width: 100%;
+
+    height: 49px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 14px;
+
+    border: 1px solid #d9c3b2;
+
+    color: #74462f;
+
+    background: #fffaf5;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    transition: 0.2s;
+}
+
+.create-account-button:hover {
+    background: #f8eee5;
+
+    border-color: #c69b7a;
+}
+
+.client-login-footer {
+    text-align: center;
+
+    margin-top: 20px;
+}
+
+.client-login-footer a {
+    color: #987b68;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.client-login-footer a:hover {
+    color: #70442d;
+}
+
+.client-login-nexora {
+    text-align: center;
+
+    margin-top: 25px;
+
+    color: #b4a49a;
+
+    font-size: 8px;
+
+    letter-spacing: 1.2px;
+}
+
+.client-login-nexora strong {
+    color: #8d6b55;
+}
+
+@media (max-width: 500px) {
+
+    .client-login-page {
+        padding: 15px;
+    }
+
+    .client-login-card {
+        padding: 30px 22px 23px;
+
+        border-radius: 23px;
+    }
+
+    .client-login-header h2 {
+        font-size: 24px;
+    }
+
+}
