@@ -154,10 +154,12 @@ app.get("/api/health", async (req, res) => {
 
     } catch (error) {
 
-        console.error(
-            "Error en health check:",
-            error.message
-        );
+        console.error("ERROR REAL DE MYSQL (health check):");
+        console.error("Mensaje:", error?.message || "(sin mensaje)");
+        console.error("Código:", error?.code || "(sin código)");
+        console.error("Errno:", error?.errno || "(sin errno)");
+        console.error("SQL State:", error?.sqlState || "(sin SQL State)");
+        console.error("Detalles:", error);
 
         res.status(500).json({
 
