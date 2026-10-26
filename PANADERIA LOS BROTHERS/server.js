@@ -34,12 +34,51 @@ app.use(express.static(
 // CONEXIÓN MYSQL
 // ==========================================
 
+
+const dbHost =
+    process.env.DB_HOST ||
+    process.env.MYSQLHOST;
+
+const dbUser =
+    process.env.DB_USER ||
+    process.env.MYSQLUSER ||
+    "root";
+
+const dbPassword =
+    process.env.DB_PASSWORD ||
+    process.env.MYSQLPASSWORD ||
+    "";
+
+const dbName =
+    process.env.DB_NAME ||
+    process.env.MYSQLDATABASE ||
+    "los_brothers";
+
+const dbPort = Number(
+    process.env.DB_PORT ||
+    process.env.MYSQLPORT ||
+    3306
+);
+
+// Diagnóstico seguro: nunca imprime la contraseña.
+console.log("🔎 CONFIGURACIÓN DE MYSQL");
+console.log({
+    host: dbHost || "(NO CONFIGURADO)",
+    puerto: dbPort,
+    usuarioConfigurado: Boolean(dbUser),
+    baseDatos: dbName,
+    contraseñaConfigurada: Boolean(dbPassword),
+    certificadoExiste: fs.existsSync(
+        path.join(__dirname, "certificados", "aiven-ca.pem")
+    )
+});
+
 const db = mysql.createPool({
-    host: process.env.DB_HOST || process.env.MYSQLHOST || "localhost",
-    user: process.env.DB_USER || process.env.MYSQLUSER || "root",
-    password: process.env.DB_PASSWORD || process.env.MYSQLPASSWORD || "",
-    database: process.env.DB_NAME || process.env.MYSQLDATABASE || "los_brothers",
-    port: Number(process.env.DB_PORT || process.env.MYSQLPORT || 3306),
+    host: dbHost || "localhost",
+    user: dbUser,
+    password: dbPassword,
+    database: dbName,
+    port: dbPort,
 
     ssl: {
         ca: fs.readFileSync(
