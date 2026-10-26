@@ -1,9 +1,37 @@
-const sesionAdmin=sessionStorage.getItem("losBrothersAdmin");
+(async function verificarSesionAdmin() {
+    try {
+        const respuesta = await fetch("/api/admin/sesion", {
+            method: "GET",
+            credentials: "same-origin",
+            cache: "no-store"
+        });
 
-if(sesionAdmin!=="true"){
-window.location.href="/login.html";
-}else{
+        if (!respuesta.ok) {
+            window.location.replace("/login.html");
+            return;
+        }
 
+        const datos = await respuesta.json();
+
+        if (!datos.ok || !datos.usuario) {
+            window.location.replace("/login.html");
+            return;
+        }
+
+        sessionStorage.setItem(
+            "losBrothersUsuario",
+            JSON.stringify(datos.usuario)
+        );
+
+        iniciarPanelAdmin();
+
+    } catch (error) {
+        console.error("Error al verificar la sesión:", error);
+        window.location.replace("/login.html");
+    }
+})();
+
+async function iniciarPanelAdmin() {
 const ordersContainer=document.getElementById("ordersContainer");
 const totalOrders=document.getElementById("totalOrders");
 const pendingOrders=document.getElementById("pendingOrders");
