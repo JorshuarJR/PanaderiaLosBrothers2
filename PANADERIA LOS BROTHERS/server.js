@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
 const path = require("path");
+const fs = require("fs");
 const crypto = require("crypto");
 const { promisify } = require("util");
 
@@ -34,23 +35,23 @@ app.use(express.static(
 // ==========================================
 
 const db = mysql.createPool({
-
     host: process.env.DB_HOST || process.env.MYSQLHOST || "localhost",
-
     user: process.env.DB_USER || process.env.MYSQLUSER || "root",
-
     password: process.env.DB_PASSWORD || process.env.MYSQLPASSWORD || "",
-
     database: process.env.DB_NAME || process.env.MYSQLDATABASE || "los_brothers",
-
     port: Number(process.env.DB_PORT || process.env.MYSQLPORT || 3306),
 
+    ssl: {
+        ca: fs.readFileSync(
+            path.join(__dirname, "certificados", "aiven-ca.pem"),
+            "utf8"
+        ),
+        rejectUnauthorized: true
+    },
+
     waitForConnections: true,
-
     connectionLimit: 10,
-
     queueLimit: 0
-
 });
 
 
