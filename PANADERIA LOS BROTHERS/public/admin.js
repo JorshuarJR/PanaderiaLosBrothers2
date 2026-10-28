@@ -62,6 +62,7 @@ const menuToggle=document.getElementById("menuToggle");
 const adminSidebar=document.getElementById("adminSidebar");
 
 const titles={
+employeesSection: "Empleados",
 dashboardSection:"Dashboard",
 ordersSection:"Pedidos",
 productsSection:"Productos",
@@ -2042,10 +2043,13 @@ refreshButton.addEventListener(
 "click",
 async()=>{
 
+
 await Promise.all([
-cargarPedidos(),
-cargarProductos()
+    cargarPedidos(),
+    cargarProductos(),
+    cargarEmpleados()
 ]);
+
 
 }
 );
@@ -2064,6 +2068,59 @@ window.location.href=
 
 }
 );
+
+
+/* ======================================
+   GESTIÓN DE EMPLEADOS
+====================================== */
+
+async function cargarEmpleados() {
+    const tabla = document.getElementById("employeesTableBody");
+    const mensaje = document.getElementById("employeesMessage");
+
+    if (!tabla || !mensaje) return;
+
+    mensaje.textContent = "Cargando empleados...";
+    tabla.innerHTML = "";
+
+    try {
+        const respuesta = await fetch("/api/admin/empleados", {
+            credentials: "same-origin"
+        });
+
+        const datos = await respuesta.json();
+
+        if (!respuesta.ok) {
+            throw new Error(datos.error || "No fue posible cargar los empleados.");
+        }
+
+        if (!Array.isArray(datos) || datos.length === 0) {
+            mensaje.textContent = "Todavía no hay empleados registrados.";
+            return;
+        }
+
+        mensaje.textContent = `Empleados registrados: ${datos.length}`;
+
+        datos.forEach(empleado => {
+            const fila = document.createElement("tr");
+
+            [
+                empleado.nombre,
+                empleado.usuario,
+                empleado.rol,
+                Number(empleado.activo) === 1 ? "Activo" : "Inactivo"
+            ].forEach(valor => {
+                const celda = document.createElement("td");
+                celda.textContent = valor ?? "";
+                fila.appendChild(celda);
+            });
+
+            tabla.appendChild(fila);
+        });
+    } catch (error) {
+        mensaje.textContent = error.message;
+    }
+}
 
 
 /* ======================================

@@ -60,6 +60,15 @@
 </div>
 </button>
 
+<button class="sidebar-item" data-section="employeesSection">
+<span>👥</span>
+<div>
+<strong>Empleados</strong>
+<small>Gestionar empleados</small>
+</div>
+</button>
+
+
 
 <button class="sidebar-item" data-section="settingsSection">
 <span>⚙️</span>
@@ -740,6 +749,33 @@ class="primary-button"
 
 </div>
 
+
+<section id="employeesSection" class="admin-section">
+
+    <div class="section-header">
+        <h2>Gestión de empleados</h2>
+        <p>Consulta y administra las cuentas del personal.</p>
+    </div>
+
+    <div class="settings-card">
+        <p id="employeesMessage">Cargando empleados...</p>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="employeesTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
 
 <script src="admin.js"></script>
 
