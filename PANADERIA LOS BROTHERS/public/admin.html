@@ -757,6 +757,47 @@ class="primary-button"
         <p>Consulta y administra las cuentas del personal.</p>
     </div>
 
+
+<div class="settings-card">
+    <h3>Registrar nuevo empleado</h3>
+
+    <form id="employeeForm">
+        <label for="employeeName">Nombre completo</label>
+        <input id="employeeName" name="nombre" type="text" required maxlength="100">
+
+        <label for="employeeUsername">Nombre de usuario</label>
+        <input id="employeeUsername" name="usuario" type="text" required maxlength="100">
+
+        <label for="employeePassword">Contraseña (mínimo 8 caracteres)</label>
+        <input id="employeePassword" name="password" type="password" required minlength="8">
+
+        <label for="employeeRole">Rol</label>
+        <select id="employeeRole" name="rol" required>
+            <option value="empleado">Empleado</option>
+            <option value="cajero">Cajero</option>
+            <option value="domiciliario">Domiciliario</option>
+        </select>
+
+        <h4>Permisos</h4>
+
+        <label><input type="checkbox" name="permisos" value="dashboard.ver" checked> Ver panel principal</label>
+        <label><input type="checkbox" name="permisos" value="pedidos.ver"> Ver pedidos</label>
+        <label><input type="checkbox" name="permisos" value="pedidos.cambiar_estado"> Cambiar estado de pedidos</label>
+        <label><input type="checkbox" name="permisos" value="pedidos.archivar"> Archivar pedidos</label>
+        <label><input type="checkbox" name="permisos" value="productos.ver"> Ver productos</label>
+        <label><input type="checkbox" name="permisos" value="productos.crear"> Crear productos</label>
+        <label><input type="checkbox" name="permisos" value="productos.editar"> Editar productos</label>
+        <label><input type="checkbox" name="permisos" value="productos.estado"> Cambiar estado de productos</label>
+        <label><input type="checkbox" name="permisos" value="empleados.ver"> Ver empleados</label>
+        <label><input type="checkbox" name="permisos" value="empleados.gestionar"> Gestionar empleados</label>
+        <label><input type="checkbox" name="permisos" value="configuracion.ver"> Ver configuración</label>
+        <label><input type="checkbox" name="permisos" value="configuracion.editar"> Editar configuración</label>
+
+        <button type="submit">Crear empleado</button>
+        <p id="employeeFormMessage"></p>
+    </form>
+</div>
+
     <div class="settings-card">
         <p id="employeesMessage">Cargando empleados...</p>
 

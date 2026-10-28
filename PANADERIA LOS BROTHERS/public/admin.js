@@ -2050,8 +2050,54 @@ await Promise.all([
     cargarEmpleados()
 ]);
 
+document.getElementById("employeeForm")?.addEventListener("submit", async function (evento) {
+    evento.preventDefault();
 
+    const formulario = this;
+    const mensaje = document.getElementById("employeeFormMessage");
+    const boton = formulario.querySelector('button[type="submit"]');
+
+    const permisos = Array.from(
+        formulario.querySelectorAll('input[name="permisos"]:checked')
+    ).map(casilla => casilla.value);
+
+    const empleado = {
+        nombre: formulario.elements.nombre.value.trim(),
+        usuario: formulario.elements.usuario.value.trim(),
+        password: formulario.elements.password.value,
+        rol: formulario.elements.rol.value,
+        permisos
+    };
+
+    mensaje.textContent = "Creando empleado...";
+    boton.disabled = true;
+
+    try {
+        const respuesta = await fetch("/api/admin/empleados", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(empleado)
+        });
+
+        const datos = await respuesta.json();
+
+        if (!respuesta.ok) {
+            throw new Error(datos.error || "No fue posible crear el empleado.");
+        }
+
+        mensaje.textContent = datos.mensaje || "Empleado creado correctamente.";
+        formulario.reset();
+
+        await cargarEmpleados();
+    } catch (error) {
+        mensaje.textContent = error.message;
+    } finally {
+        boton.disabled = false;
+    }
+});
 }
+
 );
 
 
