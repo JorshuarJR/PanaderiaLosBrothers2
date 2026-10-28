@@ -1180,6 +1180,7 @@ app.post(
     }
 );
 
+
 app.patch(
     "/api/admin/empleados/:id",
     autenticacionAdmin,
@@ -1187,39 +1188,135 @@ app.patch(
     async (req, res) => {
         try {
             const id = Number(req.params.id);
-            const activo = Number(req.body.activo);
+            const campos = req.body;
+            const camposPermitidos = ["activo", "rol", "permisos"];
 
-            if (!Number.isInteger(id) || id <= 0 ||
-                ![0, 1].includes(activo)) {
-                return res.status(400).json({ error: "Datos inválidos." });
+            if (!Number.isInteger(id) || id <= 0) {
+                return res.status(400).json({ error: "ID inválido." });
             }
 
-            const [resultado] = await db.query(
-                "UPDATE empleados_admin SET activo = ? WHERE id = ?",
-                [activo, id]
+            if (
+                !campos ||
+                typeof campos !== "object" ||
+                Array.isArray(campos) ||
+                !Object.keys(campos).length ||
+                Object.keys(campos).some(c => !camposPermitidos.includes(c))
+            ) {
+                return res.status(400).json({
+                    error: "Debes enviar activo, rol o permisos válidos."
+                });
+            }
+
+            const [filas] = await db.query(
+                "SELECT id, usuario, rol FROM empleados_admin WHERE id = ?",
+                [id]
             );
 
-            if (!resultado.affectedRows) {
-                return res.status(404).json({ error: "Empleado no encontrado." });
+            if (!filas.length) {
+                return res.status(404).json({
+                    error: "Empleado no encontrado."
+                });
             }
 
-            // Al desactivar a un empleado, invalidar sus sesiones.
-            if (activo === 0) {
-                const [empleados] = await db.query(
-                    "SELECT usuario FROM empleados_admin WHERE id = ?",
-                    [id]
+            const empleado = filas[0];
+
+            // No permitir convertir un empleado en administrador.
+            if (campos.rol !== undefined) {
+                if (
+                    !["jefe", "empleado", "cajero", "domiciliario"]
+                        .includes(campos.rol)
+                ) {
+                    return res.status(400).json({
+                        error: "Rol no permitido."
+                    });
+                }
+            }
+
+            if (campos.permisos !== undefined) {
+                if (
+                    !Array.isArray(campos.permisos) ||
+                    campos.permisos.some(
+                        p => !permisosConocidos.includes(p)
+                    ) ||
+                    new Set(campos.permisos).size !== campos.permisos.length
+                ) {
+                    return res.status(400).json({
+                        error: "La lista de permisos no es válida."
+                    });
+                }
+            }
+
+            if (campos.activo !== undefined) {
+                const activo = Number(campos.activo);
+
+                if (![0, 1].includes(activo)) {
+                    return res.status(400).json({
+                        error: "El estado debe ser 0 o 1."
+                    });
+                }
+
+                await db.query(
+                    "UPDATE empleados_admin SET activo = ? WHERE id = ?",
+                    [activo, id]
                 );
-                if (empleados.length) {
+
+                if (activo === 0) {
                     await db.query(
                         "DELETE FROM sesiones_admin WHERE usuario = ?",
-                        [empleados[0].usuario]
+                        [empleado.usuario]
                     );
                 }
             }
 
-            res.json({ ok: true, mensaje: "Empleado actualizado." });
+            if (campos.rol !== undefined || campos.permisos !== undefined) {
+                const nuevoRol = campos.rol ?? empleado.rol;
+
+                let nuevosPermisos = campos.permisos;
+
+                if (nuevosPermisos === undefined) {
+                    const [datos] = await db.query(
+                        "SELECT permisos FROM empleados_admin WHERE id = ?",
+                        [id]
+                    );
+
+                    nuevosPermisos = datos[0].permisos || [];
+                    if (typeof nuevosPermisos === "string") {
+                        try {
+                            nuevosPermisos = JSON.parse(nuevosPermisos);
+                        } catch {
+                            nuevosPermisos = [];
+                        }
+                    }
+
+                    if (!Array.isArray(nuevosPermisos)) {
+                        nuevosPermisos = [];
+                    }
+                }
+
+                await db.query(
+                    `UPDATE empleados_admin
+                     SET rol = ?, permisos = ?
+                     WHERE id = ?`,
+                    [nuevoRol, JSON.stringify(nuevosPermisos), id]
+                );
+
+                // Obliga a iniciar sesión otra vez para aplicar los cambios.
+                await db.query(
+                    "DELETE FROM sesiones_admin WHERE usuario = ?",
+                    [empleado.usuario]
+                );
+            }
+
+            res.json({
+                ok: true,
+                mensaje: "Empleado actualizado correctamente."
+            });
         } catch (error) {
-            return errorServidor(res, "No fue posible actualizar el empleado.", error);
+            return errorServidor(
+                res,
+                "No fue posible actualizar el empleado.",
+                error
+            );
         }
     }
 );
