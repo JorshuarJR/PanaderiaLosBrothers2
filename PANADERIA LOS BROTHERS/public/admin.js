@@ -2133,8 +2133,8 @@ cambiarSeccion(
 
 
 Promise.all([
-cargarPedidos(),
-cargarProductos()
+    cargarPedidos(),
+    cargarProductos(),
+    cargarEmpleados()
 ]);
-
 }
