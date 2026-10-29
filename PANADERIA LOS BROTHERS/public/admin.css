@@ -2256,3 +2256,71 @@ background:var(--orange);
         grid-column: 1;
     }
 }
+
+/* Ajuste final: empleados visibles y sin recortes */
+#employeesSection {
+    margin-top: 0 !important;
+    padding-top: 8px !important;
+    overflow: visible !important;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+#employeesSection .section-header {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+#employeesSection .settings-card {
+    margin-top: 0;
+    max-width: 100%;
+    overflow: visible;
+}
+
+#employeesSection #employeeForm {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+#employeesSection #employeeForm > label,
+#employeesSection #employeeForm > input,
+#employeesSection #employeeForm > select {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+#employeesSection .table-container {
+    max-width: 100%;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+#employeesSection table {
+    min-width: 520px;
+}
+
+#employeesSection th,
+#employeesSection td {
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+@media (max-width: 650px) {
+    #employeesSection {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    #employeesSection .settings-card {
+        padding: 14px;
+    }
+
+    #employeesSection #employeeForm {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #employeesSection table {
+        min-width: 480px;
+    }
+}
