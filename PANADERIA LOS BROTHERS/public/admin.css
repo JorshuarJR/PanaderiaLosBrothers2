@@ -2324,3 +2324,111 @@ background:var(--orange);
         min-width: 480px;
     }
 }
+
+/* Ajuste definitivo de la sección de empleados */
+#employeesSection {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-top: 0 !important;
+}
+
+#employeesSection .section-header {
+    margin: 0 0 12px !important;
+    align-items: flex-start;
+}
+
+#employeesSection .section-header h2 {
+    margin-top: 0;
+}
+
+#employeesSection .settings-card {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 18px;
+    margin: 0 0 16px;
+    overflow: hidden;
+}
+
+#employeesSection #employeeForm {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 14px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+#employeesSection #employeeForm > label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+#employeesSection #employeeForm > input:not([type="checkbox"]),
+#employeesSection #employeeForm > select {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    margin: 0 0 6px;
+}
+
+#employeesSection #employeeForm > h4,
+#employeesSection #employeeForm > button,
+#employeesSection #employeeForm > #employeeFormMessage {
+    grid-column: 1 / -1;
+}
+
+#employeesSection #employeeForm > h4 {
+    margin: 10px 0 4px;
+}
+
+#employeesSection #employeeForm > label:has(input[type="checkbox"]) {
+    align-items: flex-start;
+    padding: 5px 0;
+    font-weight: 500;
+}
+
+#employeesSection #employeeForm input[type="checkbox"] {
+    flex: 0 0 auto;
+    margin: 3px 0 0;
+}
+
+#employeesSection #employeeForm > button {
+    width: 100%;
+    margin-top: 8px;
+}
+
+#employeesSection .table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+}
+
+#employeesSection table {
+    width: 100%;
+    min-width: 480px;
+    border-collapse: collapse;
+}
+
+@media (max-width: 650px) {
+    #employeesSection .settings-card {
+        padding: 12px;
+    }
+
+    #employeesSection #employeeForm {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #employeesSection #employeeForm > h4,
+    #employeesSection #employeeForm > button,
+    #employeesSection #employeeForm > #employeeFormMessage {
+        grid-column: 1;
+    }
+}
