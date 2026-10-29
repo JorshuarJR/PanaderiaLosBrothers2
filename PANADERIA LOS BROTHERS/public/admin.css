@@ -2065,6 +2065,9 @@ background:var(--orange);
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 #employeeForm > label {
