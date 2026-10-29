@@ -2052,3 +2052,80 @@ border-radius:20px;
 ::-webkit-scrollbar-thumb:hover{
 background:var(--orange);
 }
+
+
+/* Diseño para la sección de empleados */
+#employeesSection .settings-card {
+    padding: 24px;
+    margin-bottom: 24px;
+    border-radius: 14px;
+}
+
+#employeeForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#employeeForm > label {
+    display: block;
+    color: var(--brown);
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+#employeeForm input:not([type="checkbox"]),
+#employeeForm select {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--text);
+    font-size: 13px;
+}
+
+#employeeForm input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    accent-color: var(--orange);
+}
+
+#employeeForm button {
+    align-self: flex-start;
+    margin-top: 14px;
+    padding: 12px 20px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--orange);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#employeeForm h4 {
+    margin: 18px 0 8px;
+    color: var(--brown);
+}
+
+#employeeForm label:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--cream-dark);
+}
+
+#employeesSection .table-container {
+    overflow-x: auto;
+}
+
+#employeesSection table {
+    width: 100%;
+    border-collapse: collapse;
+}
