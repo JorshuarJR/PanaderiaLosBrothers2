@@ -2118,6 +2118,7 @@ window.location.href=
 );
 
 
+
 /* ======================================
    GESTIÓN DE EMPLEADOS
 ====================================== */
@@ -2139,7 +2140,9 @@ async function cargarEmpleados() {
         const datos = await respuesta.json();
 
         if (!respuesta.ok) {
-            throw new Error(datos.error || "No fue posible cargar los empleados.");
+            throw new Error(
+                datos.error || "No fue posible cargar los empleados."
+            );
         }
 
         if (!Array.isArray(datos) || datos.length === 0) {
@@ -2152,17 +2155,53 @@ async function cargarEmpleados() {
         datos.forEach(empleado => {
             const fila = document.createElement("tr");
 
-            [
-                empleado.nombre,
-                empleado.usuario,
-                empleado.rol,
-                Number(empleado.activo) === 1 ? "Activo" : "Inactivo"
-            ].forEach(valor => {
+            const crearCelda = (valor) => {
                 const celda = document.createElement("td");
                 celda.textContent = valor ?? "";
                 fila.appendChild(celda);
-            });
+                return celda;
+            };
 
+            crearCelda(empleado.nombre);
+            crearCelda(empleado.usuario);
+            crearCelda(
+                String(empleado.rol || "")
+                    .charAt(0).toUpperCase() +
+                String(empleado.rol || "").slice(1)
+            );
+
+            const celdaEstado = crearCelda("");
+            const estado = document.createElement("span");
+            const activo = Number(empleado.activo) === 1;
+
+            estado.className = activo
+                ? "employee-status employee-status-active"
+                : "employee-status employee-status-inactive";
+
+            estado.textContent = activo ? "Activo" : "Inactivo";
+            celdaEstado.appendChild(estado);
+
+            const celdaAcciones = crearCelda("");
+            celdaAcciones.className = "employee-actions";
+
+            const botonRol = document.createElement("button");
+            botonRol.type = "button";
+            botonRol.className = "employee-action-button";
+            botonRol.textContent = "Cambiar rol";
+            botonRol.addEventListener("click", () => cambiarRolEmpleado(empleado));
+
+            const botonEstado = document.createElement("button");
+            botonEstado.type = "button";
+            botonEstado.className = activo
+                ? "employee-action-button employee-action-danger"
+                : "employee-action-button employee-action-success";
+
+            botonEstado.textContent = activo ? "Desactivar" : "Activar";
+            botonEstado.addEventListener("click", () =>
+                cambiarEstadoEmpleado(empleado, activo)
+            );
+
+            celdaAcciones.append(botonRol, botonEstado);
             tabla.appendChild(fila);
         });
     } catch (error) {
@@ -2170,6 +2209,92 @@ async function cargarEmpleados() {
     }
 }
 
+
+/* ======================================
+   ACTUALIZAR EMPLEADOS
+====================================== */
+
+async function actualizarEmpleado(id, cambios) {
+    const respuesta = await fetch(`/api/admin/empleados/${id}`, {
+        method: "PATCH",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(cambios)
+    });
+
+    const datos = await respuesta.json();
+
+    if (!respuesta.ok) {
+        throw new Error(
+            datos.error || "No fue posible actualizar el empleado."
+        );
+    }
+
+    return datos;
+}
+
+
+async function cambiarEstadoEmpleado(empleado, estaActivo) {
+    const accion = estaActivo ? "desactivar" : "activar";
+
+    if (!confirm(`¿Seguro que deseas ${accion} a ${empleado.nombre}?`)) {
+        return;
+    }
+
+    try {
+        const datos = await actualizarEmpleado(empleado.id, {
+            activo: estaActivo ? 0 : 1
+        });
+
+        alert(datos.mensaje || "Estado actualizado correctamente.");
+        await cargarEmpleados();
+    } catch (error) {
+        alert(error.message);
+    }
+}
+
+
+async function cambiarRolEmpleado(empleado) {
+    const roles = ["empleado", "cajero", "domiciliario"];
+
+    const rolActual = String(empleado.rol || "empleado");
+
+    const nuevoRol = prompt(
+        "Escribe el nuevo rol: empleado, cajero o domiciliario",
+        rolActual
+    );
+
+    if (nuevoRol === null) return;
+
+    const rolLimpio = nuevoRol.trim().toLowerCase();
+
+    if (!roles.includes(rolLimpio)) {
+        alert("Rol no válido. Usa empleado, cajero o domiciliario.");
+        return;
+    }
+
+    if (rolLimpio === rolActual) {
+        alert("El empleado ya tiene ese rol.");
+        return;
+    }
+
+    try {
+        const datos = await actualizarEmpleado(empleado.id, {
+            rol: rolLimpio
+        });
+
+        alert(
+            (datos.mensaje || "Rol actualizado.") +
+            "\nEl empleado deberá iniciar sesión nuevamente."
+        );
+
+        await cargarEmpleados();
+    } catch (error) {
+        alert(error.message);
+    }
+}
 
 /* ======================================
    INICIO

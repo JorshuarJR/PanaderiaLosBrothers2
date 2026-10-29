@@ -2306,7 +2306,10 @@ background:var(--orange);
     white-space: normal;
 }
 
-@media (max-width: 650px) {
+@media (
+   
+
+max-width: 650px) {
     #employeesSection {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -2316,7 +2319,8 @@ background:var(--orange);
         padding: 14px;
     }
 
-    #employeesSection #employeeForm {
+    #employeesSection #empl
+    oyeeForm {
         grid-template-columns: minmax(0, 1fr);
     }
 
@@ -2534,4 +2538,69 @@ background:var(--orange);
     #employeesSection #employeeForm > #employeeFormMessage {
         grid-column: 1;
     }
+}
+
+
+/* ======================================
+   ACCIONES DE EMPLEADOS
+====================================== */
+
+#employeesSection .employee-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+#employeesSection .employee-status-active {
+    background: #e4f4e7;
+    color: #286438;
+}
+
+#employeesSection .employee-status-inactive {
+    background: #fbe8e6;
+    color: #a52c25;
+}
+
+#employeesSection .employee-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 190px;
+}
+
+#employeesSection .employee-action-button {
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--white);
+    color: var(--brown);
+    font-size: 11px;
+    font-weight: 700;
+    transition: transform .2s ease, background .2s ease;
+}
+
+#employeesSection .employee-action-button:hover {
+    transform: translateY(-1px);
+    background: var(--cream-dark);
+}
+
+#employeesSection .employee-action-danger {
+    color: #a52c25;
+    border-color: #edc9c5;
+}
+
+#employeesSection .employee-action-success {
+    color: #286438;
+    border-color: #c7e5cd;
+}
+
+#employeesSection table {
+    min-width: 680px;
+}
+
+#employeesSection .table-container {
+    overflow-x: auto;
 }
