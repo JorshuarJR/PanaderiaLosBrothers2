@@ -2432,3 +2432,106 @@ background:var(--orange);
         grid-column: 1;
     }
 }
+
+/* Correccion visual de empleados */
+#employeesSection {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 12px 16px 30px;
+    box-sizing: border-box;
+}
+
+#employeesSection .section-header {
+    display: block;
+    text-align: center;
+    margin: 0 0 22px;
+}
+
+#employeesSection .section-header h2 {
+    margin: 0 0 8px;
+    font-size: clamp(22px, 3vw, 30px);
+}
+
+#employeesSection .section-header p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+#employeesSection .settings-card {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 auto 20px;
+    padding: 22px;
+    box-sizing: border-box;
+    border-radius: 14px;
+}
+
+#employeesSection #employeeForm {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 16px;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+#employeesSection #employeeForm > label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    line-height: 1.45;
+}
+
+#employeesSection #employeeForm > input:not([type="checkbox"]),
+#employeesSection #employeeForm > select {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+#employeesSection #employeeForm > h4,
+#employeesSection #employeeForm > button,
+#employeesSection #employeeForm > #employeeFormMessage {
+    grid-column: 1 / -1;
+}
+
+#employeesSection .table-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto !important;
+}
+
+#employeesSection table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+}
+
+#employeesSection th,
+#employeesSection td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 650px) {
+    #employeesSection {
+        padding: 10px 0 24px;
+    }
+
+    #employeesSection .settings-card {
+        padding: 14px;
+    }
+
+    #employeesSection #employeeForm {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #employeesSection #employeeForm > h4,
+    #employeesSection #employeeForm > button,
+    #employeesSection #employeeForm > #employeeFormMessage {
+        grid-column: 1;
+    }
+}
