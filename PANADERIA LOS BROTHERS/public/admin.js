@@ -2050,6 +2050,11 @@ await Promise.all([
     cargarEmpleados()
 ]);
 
+}
+
+);
+
+
 document.getElementById("employeeForm")?.addEventListener("submit", async function (evento) {
     evento.preventDefault();
 
@@ -2096,9 +2101,6 @@ document.getElementById("employeeForm")?.addEventListener("submit", async functi
         boton.disabled = false;
     }
 });
-}
-
-);
 
 
 logoutButton.addEventListener(
