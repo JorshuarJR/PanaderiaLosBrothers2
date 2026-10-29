@@ -63,6 +63,7 @@ const adminSidebar=document.getElementById("adminSidebar");
 
 const titles={
 employeesSection: "Empleados",
+customersSection: "Clientes registrados",
 dashboardSection:"Dashboard",
 ordersSection:"Pedidos",
 productsSection:"Productos",
@@ -70,6 +71,7 @@ settingsSection:"Configuración"
 };
 
 let pedidos=[];
+let clientes=[];
 let productos=[];
 
 function formatoPrecio(valor){
@@ -88,6 +90,20 @@ if(imagen.startsWith("assets/"))return imagen;
 return"assets/"+imagen;
 }
 
+
+async function cargarClientes(){
+const mensaje=document.getElementById("customersMessage");
+const tabla=document.getElementById("customersTableBody");
+if(!mensaje||!tabla)return;
+mensaje.textContent="Cargando clientes...";
+try{
+const respuesta=await fetch("/api/admin/clientes");
+if(!respuesta.ok)throw new Error("No se pudieron cargar los clientes.");
+clientes=await respuesta.json();
+tabla.innerHTML=clientes.map(c=>`<tr><td>${escaparHTML((c.nombre||"")+" "+(c.apellido||""))}</td><td>${escaparHTML(c.correo)}</td><td>${escaparHTML(c.telefono)}</td></tr>`).join("");
+mensaje.textContent=clientes.length?`Clientes registrados: ${clientes.length}`:"Todavía no hay clientes registrados.";
+}catch(error){mensaje.textContent=error.message;}
+}
 
 /* ======================================
    MENÚ ADMINISTRATIVO
@@ -136,6 +152,7 @@ item.addEventListener("click",()=>{
 const sectionId=item.dataset.section;
 
 cambiarSeccion(sectionId);
+if(sectionId==="customersSection")cargarClientes();
 
 });
 
