@@ -217,7 +217,6 @@ const permisosConocidos = [
     "productos.estado",
     "empleados.ver",
     "empleados.gestionar",
-    "clientes.ver",
     "configuracion.ver",
     "configuracion.editar"
 ];
@@ -1406,15 +1405,6 @@ app.put(
 );
 
 // ==========================================
-app.get("/api/admin/clientes", autenticacionAdmin, requierePermiso("clientes.ver"), async (req, res) => {
-    try {
-        const [clientes] = await db.query("SELECT id, nombre, apellido, correo, telefono FROM usuarios ORDER BY id DESC");
-        res.json(clientes);
-    } catch (error) {
-        return errorServidor(res, "No fue posible obtener los clientes.", error);
-    }
-});
-
 // ERRORES Y ARRANQUE
 // ==========================================
 
